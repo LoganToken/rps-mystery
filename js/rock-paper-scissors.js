@@ -16,7 +16,7 @@ const gameState = {
 }
 
 // Initialize
-updateDisplay();
+loadLevel(1);
 
 // This is the main game loop
 function playGame(playerChoice) {
@@ -116,7 +116,7 @@ function makeWinConditionString() {
 function makeStatusMessage() {
 	if (gameState.turn === 1) {
 		if (level.level === 1) {
-			return 'Select Rock, Paper, or Scissors to being.'
+			return 'Select Rock, Paper, or Scissors to begin.'
 		}
 
 		return `Congratulations on clearing level ${level.level - 1}!`;

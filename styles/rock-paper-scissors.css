@@ -1,0 +1,46 @@
+body {
+	background-color: rgb(72, 18, 96);
+	font-family: Arial;
+}
+
+.wrap {
+	width: 300px;
+	margin-left: 20px;
+	margin-top: 20px;
+	padding-left: 12px;
+	padding-top: 12px;
+}
+
+.wrap p, h1, h4{
+	color: white;
+}
+
+.wrap h1, h4 {
+	margin: 0;
+}
+
+.status-message {
+	min-height: 200px;
+}
+
+.rock-paper-scissors-buttons {
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.choice-button {
+	background-color: rgb(220, 220, 220);
+	color: black;
+	height: 85px;
+	width: 85px;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.choice-button:hover {
+	box-shadow: 0 0 10px rgba(255, 128, 255, 0.8);
+}
