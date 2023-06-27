@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>RPS Mystery</title>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/levels.js"></script>
+		<script type="text/javascript" src="js/rock-paper-scissors.js"></script>
+	</head>
+	<body>
+		<h1 id="level-number">Level 1</h1>
+		<h4 id="win-condition">Acheive a streak of 10 in at least 10 moves</h4>
+		<p id="status-message">Select Rock, Paper, or Scissors to begin</p>
+
+		<button class="choice-button" onclick="playGame('rock');">Rock</button>
+		<button class="choice-button" onclick="playGame('paper');">Paper</button>
+		<button class="choice-button" onclick="playGame('scissors');">Scissors</button>
+		<button class="reset-button" onclick="resetLevel();">Reset Level</button>
+		<p id="wins-display"></p>
+		<p id="losses-display"></p>
+		<p id="ties-display"></p>
+		<p id="streak-display"></p>
+		<p id="winrate-display"></p>
+	</body>
+</html>
