@@ -1,5 +1,6 @@
 let level = levels[1];
 const MAX_LEVEL = 10;
+let START_TIME;
 
 const score = {
 	wins: 0,
@@ -24,7 +25,6 @@ function playGame(playerChoice) {
 	const outcome = determineOutcome(playerChoice, computerChoice);
 	updateGameState(playerChoice, computerChoice);	
 	updateScore(outcome);
-	console.log(outcome);
 	if (checkWinCondition()) {
 		console.log('Level Completed!');
 		nextLevel();
@@ -85,13 +85,47 @@ function updateScore(outcome) {
 }
 
 function displayScore() {
-	$('#wins-display').html(`Wins: ${score.wins}`);
-	$('#losses-display').html(`Losses: ${score.losses}`);
-	$('#ties-display').html(`Ties: ${score.ties}`);
-	$('#streak-display').html(`Win Streak: ${score.streak}`);
-
+	const displayableStats = ['wins', 'losses', 'ties', 'streak'];
+	displayableStats.forEach(stat => document.getElementById(`number-${stat}-display`).innerHTML = score[stat]);
 	const roundedWinRate = Math.floor(score.winrate * 100);
-	$('#winrate-display').html(`Win Rate: ${roundedWinRate}%`);
+	document.getElementById(`number-winrate-display`).innerHTML = (roundedWinRate + '%');
+
+	setWinConditionColor();
+}
+
+function setWinConditionColor() {
+	const winCondition = level['win-condition'];
+	const metric = winCondition.metric;
+	const requiredValue = winCondition.value;
+	const currentValue = score[metric];
+	const metricElementId = `number-${metric}-display`;
+	const metricColor = getMetricColorGradient(currentValue, requiredValue);
+	
+	// remove styling on all metrics first
+	const possibleMetrics = ['streak', 'winrate'];
+	possibleMetrics.forEach(element => document.getElementById(`number-${element}-display`).style.removeProperty('color'));
+	document.getElementById(metricElementId).style.color = metricColor;
+}
+
+function getMetricColorGradient(currentValue, requiredValue) {
+	/*
+	If the currentValue is 0, the color is red
+	If the currentValue meets or exceeds the requiredValue, the color is green
+	Values in between are scaled along a gradient
+	(255, 0, 0) -> (255, 255, 0) -> (0, 255, 0)
+	*/
+	const difference = Math.max(requiredValue - currentValue, 0);
+	const scaledDifference = difference / requiredValue || 0;
+
+	const redScale = (scaledDifference >= 0.5) ? 1 : (2 * scaledDifference);
+	const redValue = Math.round(255 * redScale);
+
+	const greenScale = (scaledDifference >= 0.5) ? (2 * (1 - scaledDifference)) : 1;
+	const greenValue = Math.round(255 * greenScale);
+	
+	const blueValue = 0;
+
+	return `rgb(${redValue}, ${greenValue}, ${blueValue})`;
 }
 
 function displayLevelInfo() {
@@ -203,7 +237,8 @@ function nextLevel() {
 	if (levelNumber === MAX_LEVEL) {
 		console.log("Game End");
 		$('#level-number').html('GAME END');
-		alert('Congratulations, you have cleared all 10 levels!');
+		handleEnd();
+		// alert('Congratulations, you have cleared all 10 levels!');
 		return;
 	}
 
@@ -217,4 +252,29 @@ function getMetricString (metricName) {
 	} else if (metricName === 'winrate') {
 		return 'win rate';
 	}
+}
+
+function handleStart() {
+	START_TIME = new Date();
+	document.getElementById('start-modal').style.display = 'none';
+}
+
+function handleEnd() {
+	const endTime = new Date();
+	const milisecondsTaken = endTime - START_TIME;
+	const timeTaken = convertToMinutesAndSeconds(milisecondsTaken);
+	const gameOverModalElement = document.getElementById('game-over-modal');
+
+	document.getElementById('game-over-modal').style.display = 'flex';
+
+	const finalTimeString = `Your final time was ${timeTaken.minutes} minutes and ${timeTaken.seconds} seconds.`;
+	document.getElementById('final-time-display').innerHTML = finalTimeString;
+}
+
+function convertToMinutesAndSeconds(miliseconds) {
+	const totalSeconds = Math.round(miliseconds / 1000);
+	const minutes = Math.floor(totalSeconds / 60);
+	const seconds = totalSeconds % 60;
+	return { minutes, seconds};
+
 }

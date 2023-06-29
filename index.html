@@ -10,21 +10,57 @@
 	</head>
 	<body onload="updateDisplay();">
 		<div class="wrap">
+			<div id="start-modal" class="modal-container">
+				<div class="modal-box">
+					<p class="modal-title">Welcome to RPS Mystery</p>
+					<p class="modal-body">
+						You are tasked with playing Rock, Paper, Scissors against our agents. Each agent chooses their move based on a different strategy, and it's up to you to identify that strategy and defeat the agent. There are 10 levels of increasing difficulty. 
+					</p>
+					<p class="modal-body">Defeat all 10 levels to win the game!</p>
+					<div class="modal-footer">
+						<button id="start-button" onclick="handleStart();">Start</button>
+					</div>
+				</div>
+			</div>
+
+			<div id="game-over-modal" class="modal-container">
+				<div class="modal-box">
+					<p class="modal-title">Congratulations!</p>
+					<p class="modal-body">
+						You have completed RPS Mystery. Let me know your final time!
+					</p>
+					<p id="final-time-display">
+						Your Final time is 10 minutes and 32 seconds.
+					</p>
+				</div>
+			</div>
+
 			<h1 id="level-number"></h1>
 			<h4 id="win-condition"></h4>
 			<p id="status-message"></p>
 
 			<div class="rock-paper-scissors-buttons">
-				<button class="choice-button" onclick="playGame('rock');">Rock</button>
-				<button class="choice-button" onclick="playGame('paper');">Paper</button>
-				<button class="choice-button" onclick="playGame('scissors');">Scissors</button>
+				<button class="choice-button" onclick="playGame('rock');">
+					<img src="icons/rock.svg">
+				</button>
+				<button class="choice-button" onclick="playGame('paper');">
+					<img src="icons/paper.svg">
+				</button>
+				<button class="choice-button" onclick="playGame('scissors');">
+					<img src="icons/scissors.svg">
+				</button>
 			</div>
 
-			<p id="wins-display"></p>
-			<p id="losses-display"></p>
-			<p id="ties-display"></p>
-			<p id="streak-display"></p>
-			<p id="winrate-display"></p>
+			<p id="wins-losses-ties-display">
+				Wins: <span id="number-wins-display">50</span>
+				Losses: <span id="number-losses-display">6</span>
+				Ties: <span id="number-ties-display">121</span>
+			</p>
+
+			<p id="metrics-display">
+				Win Streak: <span id="number-streak-display">50</span>
+				Win Rate: <span id="number-winrate-display">6%</span>
+			</p>
 
 			<button class="reset-button" onclick="resetLevel();">Reset Level</button>
 		</div>

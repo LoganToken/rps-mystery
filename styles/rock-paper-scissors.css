@@ -1,5 +1,5 @@
 body {
-	background-color: rgb(72, 18, 96);
+	background-color: rgb(24, 24, 24);
 	font-family: Arial;
 }
 
@@ -19,8 +19,75 @@ body {
 	margin: 0;
 }
 
-.status-message {
-	min-height: 200px;
+.modal-container {
+	position: fixed;
+	z-index: 100;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.6);
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-box {
+	background: rgb(233, 233, 233);
+	color: black;
+	width: 400px;
+	height: 300px;
+	padding: 25px;
+	border-radius: 30px;
+	overflow: auto;
+	position: relative;
+}
+
+.modal-box p {
+	color: black;
+}
+
+.modal-title {
+	font-size: 26px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.modal-body {
+	font-size: 16px;
+}
+
+.modal-footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+#start-button {
+	background: linear-gradient(315deg, rgba(230,49,242,1) 0%, rgba(255,191,87,1) 100%);
+	color: white;
+	font-size: 20px;
+	padding: 10px 30px;
+	border: none;
+	border-radius: 20px;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+#start-button:hover {
+	box-shadow: 0 0 10px rgba(255, 128, 255, 0.8);
+}
+
+#start-button:active {
+	font-size: 16px;
+	padding: 12px 36px;
+}
+
+#game-over-modal {
+	display: none;
 }
 
 .rock-paper-scissors-buttons {
@@ -32,15 +99,40 @@ body {
 }
 
 .choice-button {
-	background-color: rgb(220, 220, 220);
+	background-color: rgba(0, 0, 0, 0);
 	color: black;
+	border-color: rgb(128, 128, 128);
+	border-style: solid;
+	border-radius: 50px;
 	height: 85px;
 	width: 85px;
 	font-size: 14px;
 	font-weight: bold;
+	padding: 15px;
 	cursor: pointer;
 }
 
-.choice-button:hover {
+.choice-button:hover,
+.reset-button:hover {
 	box-shadow: 0 0 10px rgba(255, 128, 255, 0.8);
+}
+
+.choice-button:active {
+	padding: 20px;
+}
+
+.reset-button {
+	background-color: white;
+	color: black;
+	border: none;
+	font-size: 20px;
+	padding: 10px 20px;
+	height: 40px;
+	width: 150px;
+	cursor: pointer;
+}
+
+.reset-button:active {
+	font-size: 18px;
+	padding: 11px 20px;
 }
